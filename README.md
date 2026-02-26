@@ -1,0 +1,1 @@
+In this project I am hoping the further my understanding on how to utilise a Raspberry Pi within a robot.
