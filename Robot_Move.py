@@ -33,19 +33,31 @@ def rightTurn():
     motor1.throttle = 0.5
     motor2.throttle = -0.5
     
-#Stop robot movment, no coasting
+#Stop robot movement, no coasting
 def stopTurn():
     motor1.throttle = 0.0
     motor2.throttle = 0.0
 
-try:
-    while True:
+#Move the robot    
+def robotMove(direction):
+    if direction.upper() == "LEFT":
         print("Left")
         leftTurn()
         sleep(2)
+    elif direction.upper() == "RIGHT":
         print("Right")
         rightTurn()
         sleep(2)
+    elif direction.upper() == "STOP":
+        stopTurn()
+        sleep(2)
+    else:
+        print("Invalid Input")
+
+try:
+    while True:
+        direction = input("Input direction:")
+        robotMove(direction)
 except KeyboardInterrupt: #ctrl+C to stop code
-    print("STOP")
-    stopTurn()
+    print("EXIT LOOP")
+    stopTurn() #make sure motor is off
