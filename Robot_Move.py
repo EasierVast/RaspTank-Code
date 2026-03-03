@@ -23,15 +23,21 @@ pwm_motor.frequency = PWM #Set PWM Frequency
 motor1 = motor.DCMotor(pwm_motor.channels[MOTOR_1_IN1],pwm_motor.channels[MOTOR_1_IN2] )
 motor2 = motor.DCMotor(pwm_motor.channels[MOTOR_2_IN1],pwm_motor.channels[MOTOR_2_IN2] )
 
+def leftTurn():
+    motor1.throttle = -0.5 #1 = full speed
+    motor2.throttle = 0.5
+    
+def rightTurn():
+    motor1.throttle = 0.5
+    motor2.throttle = -0.5
+
 try:
     while True:
         print("Left")
-        motor1.throttle = -0.5 #1 = full speed
-        motor2.throttle = 0.5
+        leftTurn()
         sleep(2)
         print("Right")
-        motor1.throttle = 0.5
-        motor2.throttle = -0.5
+        rightTurn()
         sleep(2)
 except KeyboardInterrupt: #ctrl+C to stop code
     print("Exit loop")
