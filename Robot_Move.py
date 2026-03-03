@@ -23,13 +23,20 @@ pwm_motor.frequency = PWM #Set PWM Frequency
 motor1 = motor.DCMotor(pwm_motor.channels[MOTOR_1_IN1],pwm_motor.channels[MOTOR_1_IN2] )
 motor2 = motor.DCMotor(pwm_motor.channels[MOTOR_2_IN1],pwm_motor.channels[MOTOR_2_IN2] )
 
+#Turn robot left until another command received
 def leftTurn():
     motor1.throttle = -0.5 #1 = full speed
     motor2.throttle = 0.5
-    
+
+#Turn robot right until another command received    
 def rightTurn():
     motor1.throttle = 0.5
     motor2.throttle = -0.5
+    
+#Stop robot movment, no coasting
+def stopTurn():
+    motor1.throttle = 0.0
+    motor2.throttle = 0.0
 
 try:
     while True:
@@ -40,6 +47,5 @@ try:
         rightTurn()
         sleep(2)
 except KeyboardInterrupt: #ctrl+C to stop code
-    print("Exit loop")
-    motor1.throttle = 0
-    motor2.throttle = 0
+    print("STOP")
+    stopTurn()
