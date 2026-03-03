@@ -43,14 +43,11 @@ def robotMove(direction):
     if direction.upper() == "LEFT":
         print("Left")
         leftTurn()
-        sleep(2)
     elif direction.upper() == "RIGHT":
         print("Right")
         rightTurn()
-        sleep(2)
     elif direction.upper() == "STOP":
         stopTurn()
-        sleep(2)
     else:
         print("Invalid Input")
 
