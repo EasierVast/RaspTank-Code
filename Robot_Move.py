@@ -25,12 +25,12 @@ motor2 = motor.DCMotor(pwm_motor.channels[MOTOR_2_IN1],pwm_motor.channels[MOTOR_
 
 try:
     while True:
-        print("Forward")
-        motor1.throttle = 0.5 #1 = full speed
+        print("Left")
+        motor1.throttle = -0.5 #1 = full speed
         motor2.throttle = 0.5
         sleep(2)
-        print("Back")
-        motor1.throttle = -0.5
+        print("Right")
+        motor1.throttle = 0.5
         motor2.throttle = -0.5
         sleep(2)
 except KeyboardInterrupt: #ctrl+C to stop code
