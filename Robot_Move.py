@@ -10,7 +10,8 @@ MOTOR_1_IN2 =  14      #Define the negative pole of left motor
 MOTOR_2_IN1 =  12      #Define the positive pole of right motor
 MOTOR_2_IN2 =  13      #Define the negative pole of right motor
 
-PWM = 100
+PWM = 60 #PWM frequency to 60hz (standard value)
+speed = 0.5 #1 = full speed
 
 #Initialize I2C bus using busio
 i2c = busio.I2C(SCL, SDA)
@@ -24,14 +25,14 @@ motor1 = motor.DCMotor(pwm_motor.channels[MOTOR_1_IN1],pwm_motor.channels[MOTOR_
 motor2 = motor.DCMotor(pwm_motor.channels[MOTOR_2_IN1],pwm_motor.channels[MOTOR_2_IN2] )
 
 #Turn robot left until another command received
-def leftTurn():
-    motor1.throttle = -0.5 #1 = full speed
-    motor2.throttle = 0.5
+def leftTurn(speed):
+    motor1.throttle = -speed
+    motor2.throttle = speed
 
 #Turn robot right until another command received    
-def rightTurn():
-    motor1.throttle = 0.5
-    motor2.throttle = -0.5
+def rightTurn(speed):
+    motor1.throttle = speed
+    motor2.throttle = -speed
     
 #Stop robot movement, no coasting
 def stopTurn():
@@ -42,10 +43,10 @@ def stopTurn():
 def robotMove(direction):
     if direction.upper() == "LEFT":
         print("Left")
-        leftTurn()
+        leftTurn(speed)
     elif direction.upper() == "RIGHT":
         print("Right")
-        rightTurn()
+        rightTurn(speed)
     elif direction.upper() == "STOP":
         stopTurn()
     else:
