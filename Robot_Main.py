@@ -27,5 +27,5 @@ try:
         robotMove(direction)
 except KeyboardInterrupt: #ctrl+C to stop code
     print("EXIT LOOP")
-    stopTurn() #make sure motor is off
+    move.stopTurn() #make sure motor is off
 
