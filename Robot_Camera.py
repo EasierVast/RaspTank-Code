@@ -14,12 +14,14 @@ robotCam.start() #start camera
 
 while True:
     tStart = time.time()
-    frame = robotCam.capture_array() 
+    frame = robotCam.capture_array()
+    cv2.putText(frame, str(int(fps)), (30, 60), cv2.FONT_HERSHEY_SIMPLEX, 1.5, (0, 0, 255), 3)
     cv2.imshow("Camera Feed", frame)
     if cv2.waitKey(1) == ord('q'): #if detect 'q' press
         break
     tEnd = time.time()
     loopTime = tEnd - tStart #time for iteration of loop (time at end - time at start)
     fps = .9*fps + .1*(1/loopTime) #using low pass filter for cleaner data value
-    print(int(fps)) #make it 'int' to round the number
+    #print(int(fps)) #make it 'int' to round the number
+    
 cv2.destroyAllWindows()
