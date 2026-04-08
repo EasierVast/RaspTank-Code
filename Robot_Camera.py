@@ -20,7 +20,8 @@ robotCam.preview_configuration.main.format = "RGB888" #so I don't need to conver
 robotCam.preview_configuration.controls.FrameRate = 30 #desired framerate, may not be actual framerate
 robotCam.start() 
 
-def showFPS(fps, tStart, tEnd):
+def calcFPS(fps, tStart):
+    tEnd = time.time()
     loopTime = tEnd - tStart 
     fps = .9*fps + .1*(1/loopTime) #using low pass filter for cleaner data value
     return fps
@@ -35,7 +36,6 @@ while True:
     cv2.imshow("Camera Feed", img)
     if cv2.waitKey(1) == ord('q'): #if detect 'q' press
         break
-    tEnd = time.time()
-    fps = showFPS(fps, tStart, tEnd)
+    fps = calcFPS(fps, tStart)
     
 cv2.destroyAllWindows()
