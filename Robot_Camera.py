@@ -33,11 +33,20 @@ def showFPS(fps, prevTime, img):
     cv2.putText(img, str(int(fps)), pos, font, height, color, weight)
     return fps, prevTime, img
     #print(int(fps)) #make it 'int' to round the number
+    
+def drawBox(img):
+    upperLeft = (250, 100) #placeholder for testing
+    lowerRight = (400, 200) #placeholder for testing
+    color = (0, 0, 255) #RED
+    weight = 3
+    cv2.rectangle(img, upperLeft, lowerRight, color, weight)
+    return img
 
 #Display camera feed
 while True:
     img = robotCam.capture_array()
-    fps, prevTime, img = showFPS(fps, prevTime, img)
+    #fps, prevTime, img = showFPS(fps, prevTime, img)
+    img = drawBox(img)
     cv2.imshow("Camera Feed", img)
     if cv2.waitKey(1) == ord('q'): #if detect 'q' press
         break
