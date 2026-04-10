@@ -8,12 +8,14 @@ prevTime = 0
 dispW = 640
 dispH = 360
 
-#Initialise Camera
-robotCam = Picamera2()
-robotCam.preview_configuration.main.size = (dispW, dispH)
-robotCam.preview_configuration.main.format = "RGB888" #so I don't need to convert the format later for display purposes
-robotCam.preview_configuration.controls.FrameRate = 30 #desired framerate, may not be actual framerate
-robotCam.start() 
+def initCam():
+    #Initialise Camera
+    robotCam = Picamera2()
+    robotCam.preview_configuration.main.size = (dispW, dispH)
+    robotCam.preview_configuration.main.format = "RGB888" #so I don't need to convert the format later for display purposes
+    robotCam.preview_configuration.controls.FrameRate = 30 #desired framerate, may not be actual framerate
+    robotCam.start()
+    return robotCam
 
 def calcFPS(fps, prevTime):
     currTime = time.time()
@@ -43,9 +45,10 @@ def drawBox(img):
     return img
 
 #Display camera feed
+robotCam = initCam()
 while True:
     img = robotCam.capture_array()
-    #fps, prevTime, img = showFPS(fps, prevTime, img)
+    fps, prevTime, img = showFPS(fps, prevTime, img)
     img = drawBox(img)
     cv2.imshow("Camera Feed", img)
     if cv2.waitKey(1) == ord('q'): #if detect 'q' press
