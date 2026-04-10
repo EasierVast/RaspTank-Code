@@ -44,14 +44,16 @@ def drawBox(img):
     cv2.rectangle(img, upperLeft, lowerRight, color, weight)
     return img
 
-#Display camera feed
-robotCam = initCam()
-while True:
-    img = robotCam.capture_array()
-    fps, prevTime, img = showFPS(fps, prevTime, img)
-    img = drawBox(img)
-    cv2.imshow("Camera Feed", img)
-    if cv2.waitKey(1) == ord('q'): #if detect 'q' press
-        break
+if __name__ == '__main__': #Test Code
+    
+    #Display camera feed
+    robotCam = initCam()
+    while True:
+        img = robotCam.capture_array()
+        fps, prevTime, img = showFPS(fps, prevTime, img)
+        img = drawBox(img)
+        cv2.imshow("Camera Feed", img)
+        if cv2.waitKey(1) == ord('q'): #if detect 'q' press
+            break
     
 cv2.destroyAllWindows()
