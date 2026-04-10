@@ -38,6 +38,7 @@ def showFPS(fps, prevTime, img):
     
 def getObjectOfInterest(robotCam):
     robotCam.capture_file("ObjectOfInterest.jpg")
+    print("Screenshot Taken")
     
 def drawBox(img):
     upperLeft = (250, 100) #placeholder for testing
