@@ -36,6 +36,9 @@ def showFPS(fps, prevTime, img):
     return fps, prevTime, img
     #print(int(fps)) #make it 'int' to round the number
     
+def getObjectOfInterest(robotCam):
+    robotCam.capture_file("ObjectOfInterest.jpg")
+    
 def drawBox(img):
     upperLeft = (250, 100) #placeholder for testing
     lowerRight = (400, 200) #placeholder for testing
@@ -50,9 +53,11 @@ if __name__ == '__main__': #Test Code
     robotCam = initCam()
     while True:
         img = robotCam.capture_array()
-        fps, prevTime, img = showFPS(fps, prevTime, img)
-        img = drawBox(img)
+        #fps, prevTime, img = showFPS(fps, prevTime, img)
+        #img = drawBox(img)
         cv2.imshow("Camera Feed", img)
+        if cv2.waitKey(1) == ord('s'):
+            getObjectOfInterest(robotCam)
         if cv2.waitKey(1) == ord('q'): #if detect 'q' press
             break
     
