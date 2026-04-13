@@ -47,6 +47,12 @@ def drawBox(img):
     weight = 3
     cv2.rectangle(img, upperLeft, lowerRight, color, weight)
     return img
+    
+def showImage(filePath):
+    image = cv2.imread(filePath)
+    cv2.imshow("Image", image)
+    cv2.waitKey(0)
+    cv2.destroyWindow("Image")
 
 if __name__ == '__main__': #Test Code
     
@@ -57,9 +63,11 @@ if __name__ == '__main__': #Test Code
         #fps, prevTime, img = showFPS(fps, prevTime, img)
         #img = drawBox(img)
         cv2.imshow("Camera Feed", img)
-        if cv2.waitKey(1) == ord('s'):
-            getObjectOfInterest(robotCam)
         if cv2.waitKey(1) == ord('q'): #if detect 'q' press
             break
+        elif cv2.waitKey(1) == ord('s'):
+            getObjectOfInterest(robotCam)
+        elif cv2.waitKey(1) == ord('p'):
+            showImage('ObjectOfInterest.jpg')
     
 cv2.destroyAllWindows()
