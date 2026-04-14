@@ -40,6 +40,13 @@ def getObjectOfInterest(robotCam):
     robotCam.capture_file("ObjectOfInterest.jpg")
     print("Screenshot Taken")
     
+def getObjectColor(dispW, dispH, filepath):
+    image = cv2.imread(filepath)
+    centerRow = int(dispH/2)
+    centerColumn = int(dispW/2)
+    objectColor = image[centerRow, centerColumn]
+    return objectColor
+    
 def drawBox(img):
     upperLeft = (250, 100) #placeholder for testing
     lowerRight = (400, 200) #placeholder for testing
@@ -69,5 +76,8 @@ if __name__ == '__main__': #Test Code
             getObjectOfInterest(robotCam)
         elif cv2.waitKey(1) == ord('p'):
             showImage('ObjectOfInterest.jpg')
+        elif cv2.waitKey(1) == ord ('c'):
+            objectColor = getObjectColor(dispW, dispH, 'ObjectOfInterest.jpg')
+            print (objectColor)
     
 cv2.destroyAllWindows()
