@@ -2,6 +2,7 @@
 import cv2
 from picamera2 import Picamera2
 import time
+import numpy as np
 
 fps = 0
 prevTime = 0
@@ -47,6 +48,22 @@ def getObjectColor(dispW, dispH, filepath):
     objectColor = image[centerRow, centerColumn]
     return objectColor
     
+def createMask(img, color):
+    numpyColor = np.uint8([[color]]) #make colour value into 3D numpy array
+    hsvNumpyColor = cv2.cvtColor(numpyColor, cv2.COLOR_BGR2HSV)
+    lowerLimit = hsvNumpyColor[0][0][0] - 10, 100, 100
+    upperLimit = hsvNumpyColor[0][0][0] + 10, 255, 255
+    
+    #turn the limit tuples into numpy arrays
+    lowerLimit = np.array(lowerLimit, dtype=np.uint8)
+    upperLimit = np.array(upperLimit, dtype=np.uint8)
+    
+    #prepare video to generate mask
+    hsvImg  = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+    mask = cv2.inRange(hsvImg, lowerLimit, upperLimit)
+    return mask
+
+    
 def drawBox(img):
     upperLeft = (250, 100) #placeholder for testing
     lowerRight = (400, 200) #placeholder for testing
@@ -69,15 +86,15 @@ if __name__ == '__main__': #Test Code
         img = robotCam.capture_array()
         #fps, prevTime, img = showFPS(fps, prevTime, img)
         #img = drawBox(img)
-        cv2.imshow("Camera Feed", img)
         if cv2.waitKey(1) == ord('q'): #if detect 'q' press
             break
         elif cv2.waitKey(1) == ord('s'):
             getObjectOfInterest(robotCam)
         elif cv2.waitKey(1) == ord('p'):
             showImage('ObjectOfInterest.jpg')
-        elif cv2.waitKey(1) == ord ('c'):
-            objectColor = getObjectColor(dispW, dispH, 'ObjectOfInterest.jpg')
-            print (objectColor)
+        objectColor = getObjectColor(dispW, dispH, 'ObjectOfInterest.jpg')
+        mask = createMask(img, objectColor)
+        cv2.imshow("Camera Feed", img)
+        cv2.imshow("Mask Check", mask)
     
 cv2.destroyAllWindows()
