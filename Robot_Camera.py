@@ -9,6 +9,13 @@ prevTime = 0
 dispW = 640
 dispH = 360
 
+try:
+    file = open('ObjectOfInterest.jpg')
+except:
+    objExist = False
+else:
+    objExist = True
+
 def initCam():
     #Initialise Camera
     robotCam = Picamera2()
@@ -40,6 +47,8 @@ def showFPS(fps, prevTime, img):
 def getObjectOfInterest(robotCam):
     robotCam.capture_file("ObjectOfInterest.jpg")
     print("Screenshot Taken")
+    objExist = True
+    return objExist
     
 def getObjectColor(dispW, dispH, filepath):
     image = cv2.imread(filepath)
@@ -89,12 +98,15 @@ if __name__ == '__main__': #Test Code
         if cv2.waitKey(1) == ord('q'): #if detect 'q' press
             break
         elif cv2.waitKey(1) == ord('s'):
-            getObjectOfInterest(robotCam)
-        elif cv2.waitKey(1) == ord('p'):
+            objExist = getObjectOfInterest(robotCam)
+        elif cv2.waitKey(1) == ord('p') and objExist == True:
             showImage('ObjectOfInterest.jpg')
-        objectColor = getObjectColor(dispW, dispH, 'ObjectOfInterest.jpg')
-        mask = createMask(img, objectColor)
-        cv2.imshow("Camera Feed", img)
-        cv2.imshow("Mask Check", mask)
+           
+           
+        cv2.imshow("Camera Feed", img)    
+        if objExist == True:
+            objectColor = getObjectColor(dispW, dispH, 'ObjectOfInterest.jpg')
+            mask = createMask(img, objectColor)
+            cv2.imshow("Mask Check", mask)
     
 cv2.destroyAllWindows()
