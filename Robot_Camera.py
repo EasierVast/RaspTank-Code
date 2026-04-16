@@ -72,9 +72,10 @@ def createMask(img, color):
     mask = cv2.inRange(hsvImg, lowerLimit, upperLimit)
     return mask
     
-def getContours(img, mask):
+def getContour(img, mask):
     contours, hierarchy = cv2.findContours(mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
-    cv2.drawContours(img, contours, -1, (0,255,0), 3)
+    contour = sorted(contours, key = lambda x:cv2.contourArea(x), reverse = True)
+    cv2.drawContours(img, contour, 0, (0,255,0), 3)
     return img
 
 def drawBox(img):
@@ -108,7 +109,7 @@ if __name__ == '__main__': #Test Code
             objectColor = getObjectColor(dispW, dispH, 'ObjectOfInterest.jpg')
             mask = createMask(img, objectColor)
             cv2.imshow("Mask Check", mask)
-            img = getContours(img, mask)
+            img = getContour(img, mask)
         #img = drawBox(img)
         #fps, prevTime, img = showFPS(fps, prevTime, img)
         cv2.imshow("Camera Feed", img)  
