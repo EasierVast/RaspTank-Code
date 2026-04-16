@@ -97,8 +97,6 @@ if __name__ == '__main__': #Test Code
     robotCam = initCam()
     while True:
         img = robotCam.capture_array()
-        #fps, prevTime, img = showFPS(fps, prevTime, img)
-        #img = drawBox(img)
         if cv2.waitKey(1) == ord('q'): #if detect 'q' press
             break
         elif cv2.waitKey(1) == ord('s'):
@@ -111,6 +109,8 @@ if __name__ == '__main__': #Test Code
             mask = createMask(img, objectColor)
             cv2.imshow("Mask Check", mask)
             img = getContours(img, mask)
+        #img = drawBox(img)
+        #fps, prevTime, img = showFPS(fps, prevTime, img)
         cv2.imshow("Camera Feed", img)  
     
 cv2.destroyAllWindows()
