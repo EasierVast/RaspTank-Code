@@ -71,8 +71,12 @@ def createMask(img, color):
     hsvImg  = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
     mask = cv2.inRange(hsvImg, lowerLimit, upperLimit)
     return mask
-
     
+def getContours(img, mask):
+    contours, hierarchy = cv2.findContours(mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+    cv2.drawContours(img, contours, -1, (0,255,0), 3)
+    return img
+
 def drawBox(img):
     upperLeft = (250, 100) #placeholder for testing
     lowerRight = (400, 200) #placeholder for testing
@@ -102,11 +106,11 @@ if __name__ == '__main__': #Test Code
         elif cv2.waitKey(1) == ord('p') and objExist == True:
             showImage('ObjectOfInterest.jpg')
            
-           
-        cv2.imshow("Camera Feed", img)    
         if objExist == True:
             objectColor = getObjectColor(dispW, dispH, 'ObjectOfInterest.jpg')
             mask = createMask(img, objectColor)
             cv2.imshow("Mask Check", mask)
+            img = getContours(img, mask)
+        cv2.imshow("Camera Feed", img)  
     
 cv2.destroyAllWindows()
