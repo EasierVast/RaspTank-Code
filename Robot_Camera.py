@@ -78,9 +78,10 @@ def getContour(mask):
     contour = contoursSorted[0]
     return contour
 
-def drawBox(img):
-    upperLeft = (250, 100) #placeholder for testing
-    lowerRight = (400, 200) #placeholder for testing
+def drawBoundingBox(img, contour):
+    x, y, w, h = cv2.boundingRect(contour)
+    upperLeft = (x, y)
+    lowerRight = (x + w, y + h)
     color = (0, 0, 255) #RED
     weight = 3
     cv2.rectangle(img, upperLeft, lowerRight, color, weight)
@@ -110,8 +111,8 @@ if __name__ == '__main__': #Test Code
             mask = createMask(img, objectColor)
             cv2.imshow("Mask Check", mask)
             contour = getContour(mask)
-            cv2.drawContours(img, [contour], 0, (0,255,0), 3)
-        #img = drawBox(img)
+            #cv2.drawContours(img, [contour], 0, (0,255,0), 3)
+            img = drawBoundingBox(img, contour)
         #fps, prevTime, img = showFPS(fps, prevTime, img)
         cv2.imshow("Camera Feed", img)  
     
