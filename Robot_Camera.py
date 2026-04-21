@@ -74,9 +74,12 @@ def createMask(img, color):
     
 def getContour(mask):
     contours, hierarchy = cv2.findContours(mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
-    contoursSorted = sorted(contours, key = cv2.contourArea, reverse = True)
-    contour = contoursSorted[0]
-    return contour
+    if contours:
+        contoursSorted = sorted(contours, key = cv2.contourArea, reverse = True)
+        contour = contoursSorted[0]
+        return contour
+    else:
+        return None
 
 def drawBoundingBox(img, contour):
     x, y, w, h = cv2.boundingRect(contour)
