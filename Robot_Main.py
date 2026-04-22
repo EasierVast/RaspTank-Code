@@ -33,7 +33,8 @@ try:
 			break
 		#direction = input("Input direction:")
 		#robotMove(direction)
-		fps, prevTime, img = cam.showFPS(fps, prevTime, img)
+		img = cam.getOOI(img)
+		#fps, prevTime, img = cam.showFPS(fps, prevTime, img)
 		cv2.imshow("Camera Feed", img)
 except KeyboardInterrupt: #ctrl+C to stop code
     print("EXIT LOOP")
