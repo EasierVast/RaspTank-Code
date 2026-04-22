@@ -33,7 +33,8 @@ try:
 			break
 		#direction = input("Input direction:")
 		#robotMove(direction)
-		img = cam.getOOI(img)
+		objX, objY, objWidth, objHeight = cam.getOOI(img)
+		img = cam.drawBoundingBox(img, objX, objY, objWidth, objHeight)
 		#fps, prevTime, img = cam.showFPS(fps, prevTime, img)
 		cv2.imshow("Camera Feed", img)
 except KeyboardInterrupt: #ctrl+C to stop code
