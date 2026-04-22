@@ -95,6 +95,16 @@ def showImage(filePath):
     cv2.imshow("Image", image)
     cv2.waitKey(0)
     cv2.destroyWindow("Image")
+    
+def getOOI(img):
+    if objExist == True:
+        objectColor = getObjectColor(dispW, dispH, 'ObjectOfInterest.jpg')
+        mask = createMask(img, objectColor)
+        #cv2.imshow("Mask Check", mask)
+        contour = getContour(mask)
+        #cv2.drawContours(img, [contour], 0, (0,255,0), 3)
+        img = drawBoundingBox(img, contour)
+    return img
 
 if __name__ == '__main__': #Test Code
     
@@ -108,14 +118,7 @@ if __name__ == '__main__': #Test Code
             objExist = getObjectOfInterest(robotCam)
         elif cv2.waitKey(1) == ord('p') and objExist == True:
             showImage('ObjectOfInterest.jpg')
-           
-        if objExist == True:
-            objectColor = getObjectColor(dispW, dispH, 'ObjectOfInterest.jpg')
-            mask = createMask(img, objectColor)
-            cv2.imshow("Mask Check", mask)
-            contour = getContour(mask)
-            #cv2.drawContours(img, [contour], 0, (0,255,0), 3)
-            img = drawBoundingBox(img, contour)
+        img = getOOI(img)
         #fps, prevTime, img = showFPS(fps, prevTime, img)
         cv2.imshow("Camera Feed", img)  
     
