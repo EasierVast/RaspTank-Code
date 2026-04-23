@@ -36,6 +36,12 @@ try:
 		img = cam.drawBoundingBox(img, objX, objY, objWidth, objHeight)
 		#fps, prevTime, img = cam.showFPS(fps, prevTime, img)
 		cv2.imshow("Camera Feed", img)
+		
+		dispCenterX = dispW/2
+		objCenterX = objWidth/2
+		panError = (objX + objCenterX) - dispCenterX
+		print("panError = " + str(panError))
+		 
 except KeyboardInterrupt: #ctrl+C to stop code
     print("EXIT LOOP")
     move.stopTurn() #make sure motor is off
