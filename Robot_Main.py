@@ -7,10 +7,9 @@ import cv2
 from time import sleep
 import Robot_Move as move
 import Robot_Camera as cam
+from Robot_Camera import fps, prevTime, dispW, dispH
 
 speed = 0.5 #1 = full speed
-fps = 0
-prevTime = 0
 
 #Move the robot    
 def robotMove(direction):
