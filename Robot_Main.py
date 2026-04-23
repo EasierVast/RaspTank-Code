@@ -40,7 +40,13 @@ try:
 		dispCenterX = dispW/2
 		objCenterX = objWidth/2
 		panError = (objX + objCenterX) - dispCenterX
-		print("panError = " + str(panError))
+		#print("panError = " + str(panError))
+		if panError > 50:
+			print("RIGHT")
+		elif panError < -50:
+			print("LEFT")
+		else:
+			print("STOP")
 		 
 except KeyboardInterrupt: #ctrl+C to stop code
     print("EXIT LOOP")
