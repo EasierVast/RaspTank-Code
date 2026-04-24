@@ -10,6 +10,7 @@ import Robot_Camera as cam
 from Robot_Camera import fps, prevTime, dispW, dispH
 
 speed = 0.5 #1 = full speed
+currentDirection = "STOP"
 
 #Move the robot    
 def robotMove(direction):
@@ -42,11 +43,17 @@ try:
 		panError = (objX + objCenterX) - dispCenterX
 		#print("panError = " + str(panError))
 		if panError > 50:
-			print("RIGHT")
+			if currentDirection != "RIGHT":
+				print("RIGHT")
+				currentDirection = "RIGHT"
 		elif panError < -50:
-			print("LEFT")
+			if currentDirection != "LEFT":
+				print("LEFT")
+				currentDirection = "LEFT"
 		else:
-			print("STOP")
+			if currentDirection != "STOP":
+				print("STOP")
+				currentDirection = "STOP"
 		 
 except KeyboardInterrupt: #ctrl+C to stop code
     print("EXIT LOOP")
