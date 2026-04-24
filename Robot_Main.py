@@ -24,6 +24,12 @@ def robotMove(direction):
         move.stopTurn()
     else:
         print("Invalid Input")
+	
+def calcPanError(dispW, objWidth, objX):
+	dispCenterX = dispW/2
+	objCenterX = objWidth/2
+	panError = (objX + objCenterX) - dispCenterX
+	return panError
 
 try:
 	robotCam = cam.initCam()
@@ -38,9 +44,7 @@ try:
 		#fps, prevTime, img = cam.showFPS(fps, prevTime, img)
 		cv2.imshow("Camera Feed", img)
 		
-		dispCenterX = dispW/2
-		objCenterX = objWidth/2
-		panError = (objX + objCenterX) - dispCenterX
+		panError = calcPanError(dispW, objWidth, objX)
 		#print("panError = " + str(panError))
 		if panError > 50:
 			if currentDirection != "RIGHT":
