@@ -11,7 +11,6 @@ MOTOR_2_IN1 =  12      #Define the positive pole of right motor
 MOTOR_2_IN2 =  13      #Define the negative pole of right motor
 
 PWM = 60 #PWM frequency to 60hz (standard value)
-#speed = 0.5 #1 = full speed
 
 #Initialize I2C bus using busio
 i2c = busio.I2C(SCL, SDA)
@@ -38,29 +37,29 @@ def rightTurn(speed):
 def stopTurn():
     motor1.throttle = 0.0
     motor2.throttle = 0.0
+    
+#Move the robot    
+def robotMove(direction, speed):
+    if direction.upper() == "LEFT":
+        print("Left")
+        leftTurn(speed)
+    elif direction.upper() == "RIGHT":
+        print("Right")
+        rightTurn(speed)
+    elif direction.upper() == "STOP":
+        stopTurn()
+    else:
+        print("Invalid Input")
 
 
 if __name__ == '__main__': #Test Code
     
     speed = 0.5 #1 = full speed
-    
-    #Move the robot    
-    def robotMove(direction):
-        if direction.upper() == "LEFT":
-            print("Left")
-            leftTurn(speed)
-        elif direction.upper() == "RIGHT":
-            print("Right")
-            rightTurn(speed)
-        elif direction.upper() == "STOP":
-            stopTurn()
-        else:
-            print("Invalid Input")
 
     try:
         while True:
             direction = input("Input direction:")
-            robotMove(direction)
+            robotMove(direction, speed)
     except KeyboardInterrupt: #ctrl+C to stop code
         print("EXIT LOOP")
         stopTurn() #make sure motor is off

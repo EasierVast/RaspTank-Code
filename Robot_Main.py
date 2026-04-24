@@ -11,19 +11,6 @@ from Robot_Camera import fps, prevTime, dispW, dispH
 
 speed = 0.5 #1 = full speed
 currentDirection = "STOP"
-
-#Move the robot    
-def robotMove(direction):
-    if direction.upper() == "LEFT":
-        print("Left")
-        move.leftTurn(speed)
-    elif direction.upper() == "RIGHT":
-        print("Right")
-        move.rightTurn(speed)
-    elif direction.upper() == "STOP":
-        move.stopTurn()
-    else:
-        print("Invalid Input")
 	
 def calcPanError(dispW, objWidth, objX):
 	dispCenterX = dispW/2
@@ -37,8 +24,8 @@ try:
 		img = robotCam.capture_array()
 		if cv2.waitKey(1) == ord('q'): #if detect 'q' press
 			break
-		#direction = input("Input direction:")
-		#robotMove(direction)
+		direction = input("Input direction:")
+		move.robotMove(direction, speed)
 		objX, objY, objWidth, objHeight = cam.getOOI(img)
 		img = cam.drawBoundingBox(img, objX, objY, objWidth, objHeight)
 		#fps, prevTime, img = cam.showFPS(fps, prevTime, img)
