@@ -41,10 +41,10 @@ def stopTurn():
 #Move the robot    
 def robotMove(direction, speed):
     if direction.upper() == "LEFT":
-        print("Left")
+        #print("Left")
         leftTurn(speed)
     elif direction.upper() == "RIGHT":
-        print("Right")
+        #print("Right")
         rightTurn(speed)
     elif direction.upper() == "STOP":
         stopTurn()

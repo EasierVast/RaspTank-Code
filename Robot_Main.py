@@ -23,9 +23,8 @@ try:
 	while True:
 		img = robotCam.capture_array()
 		if cv2.waitKey(1) == ord('q'): #if detect 'q' press
+			move.stopTurn() #make sure motor is off
 			break
-		direction = input("Input direction:")
-		move.robotMove(direction, speed)
 		objX, objY, objWidth, objHeight = cam.getOOI(img)
 		img = cam.drawBoundingBox(img, objX, objY, objWidth, objHeight)
 		#fps, prevTime, img = cam.showFPS(fps, prevTime, img)
@@ -36,15 +35,19 @@ try:
 		if panError > 50:
 			if currentDirection != "RIGHT":
 				print("RIGHT")
+				direction = "RIGHT"
 				currentDirection = "RIGHT"
 		elif panError < -50:
 			if currentDirection != "LEFT":
 				print("LEFT")
+				direction = "LEFT"
 				currentDirection = "LEFT"
 		else:
 			if currentDirection != "STOP":
 				print("STOP")
+				direction = "STOP"
 				currentDirection = "STOP"
+		move.robotMove(direction, speed)
 		 
 except KeyboardInterrupt: #ctrl+C to stop code
     print("EXIT LOOP")
