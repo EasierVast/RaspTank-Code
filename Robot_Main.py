@@ -42,12 +42,12 @@ try:
 		if mode == "MOVE":
 			panError = calcPanError(dispW, objWidth, objX)
 			#print("panError = " + str(panError))
-			if panError > 50:
+			if panError > 100:
 				if currentDirection != "RIGHT":
 					print("RIGHT")
 					direction = "RIGHT"
 					currentDirection = "RIGHT"
-			elif panError < -50:
+			elif panError < -100:
 				if currentDirection != "LEFT":
 					print("LEFT")
 					direction = "LEFT"
