@@ -10,7 +10,9 @@ import Robot_Camera as cam
 from Robot_Camera import fps, prevTime, dispW, dispH
 
 speed = 0.5 #1 = full speed
+direction = "STOP"
 currentDirection = "STOP"
+mode = "STANDBY"
 	
 def calcPanError(dispW, objWidth, objX):
 	dispCenterX = dispW/2
@@ -22,32 +24,40 @@ try:
 	robotCam = cam.initCam()
 	while True:
 		img = robotCam.capture_array()
+		if cv2.waitKey(1) == ord('s'):
+			print("Robot in Standby Mode")
+			mode = "STANDBY"
+		if cv2.waitKey(1) == ord('m'):
+			mode = "MOVE"
+			print("Robot in Move Mode")
 		if cv2.waitKey(1) == ord('q'): #if detect 'q' press
 			move.stopTurn() #make sure motor is off
 			break
+			
 		objX, objY, objWidth, objHeight = cam.getOOI(img)
 		img = cam.drawBoundingBox(img, objX, objY, objWidth, objHeight)
 		#fps, prevTime, img = cam.showFPS(fps, prevTime, img)
 		cv2.imshow("Camera Feed", img)
 		
-		panError = calcPanError(dispW, objWidth, objX)
-		#print("panError = " + str(panError))
-		if panError > 50:
-			if currentDirection != "RIGHT":
-				print("RIGHT")
-				direction = "RIGHT"
-				currentDirection = "RIGHT"
-		elif panError < -50:
-			if currentDirection != "LEFT":
-				print("LEFT")
-				direction = "LEFT"
-				currentDirection = "LEFT"
-		else:
-			if currentDirection != "STOP":
-				print("STOP")
-				direction = "STOP"
-				currentDirection = "STOP"
-		move.robotMove(direction, speed)
+		if mode == "MOVE":
+			panError = calcPanError(dispW, objWidth, objX)
+			#print("panError = " + str(panError))
+			if panError > 50:
+				if currentDirection != "RIGHT":
+					print("RIGHT")
+					direction = "RIGHT"
+					currentDirection = "RIGHT"
+			elif panError < -50:
+				if currentDirection != "LEFT":
+					print("LEFT")
+					direction = "LEFT"
+					currentDirection = "LEFT"
+			else:
+				if currentDirection != "STOP":
+					print("STOP")
+					direction = "STOP"
+					currentDirection = "STOP"
+			move.robotMove(direction, speed)
 		 
 except KeyboardInterrupt: #ctrl+C to stop code
     print("EXIT LOOP")
