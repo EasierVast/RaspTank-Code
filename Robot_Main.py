@@ -24,10 +24,10 @@ try:
 	robotCam = cam.initCam()
 	while True:
 		img = robotCam.capture_array()
-		if cv2.waitKey(1) == ord('s'):
+		if cv2.waitKey(1) == ord('s') and mode != "STANDBY":
 			print("Robot in Standby Mode")
 			mode = "STANDBY"
-		if cv2.waitKey(1) == ord('m'):
+		if cv2.waitKey(1) == ord('m') and mode != "MOVE":
 			mode = "MOVE"
 			print("Robot in Move Mode")
 		if cv2.waitKey(1) == ord('q'): #if detect 'q' press
