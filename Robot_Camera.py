@@ -99,7 +99,7 @@ def showImage(filePath):
     cv2.waitKey(0)
     cv2.destroyWindow("Image")
     
-def getOOI(img):
+def getOOI(img, objExist):
     if objExist == True:
         objectColor = getObjectColor(dispW, dispH, 'ObjectOfInterest.jpg')
         mask = createMask(img, objectColor)
@@ -123,7 +123,7 @@ if __name__ == '__main__': #Test Code
             objExist = getObjectOfInterest(robotCam)
         elif cv2.waitKey(1) == ord('p') and objExist == True:
             showImage('ObjectOfInterest.jpg')
-        objX, objY, objWidth, objHeight = getOOI(img)
+        objX, objY, objWidth, objHeight = getOOI(img, objExist)
         img = drawBoundingBox(img, objX, objY, objWidth, objHeight)
         #fps, prevTime, img = showFPS(fps, prevTime, img)
         cv2.imshow("Camera Feed", img)  

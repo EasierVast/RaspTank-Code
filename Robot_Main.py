@@ -36,7 +36,7 @@ try:
 			move.stopTurn() #make sure motor is off
 			break
 			
-		objX, objY, objWidth, objHeight = cam.getOOI(img)
+		objX, objY, objWidth, objHeight = cam.getOOI(img, objExist)
 		img = cam.drawBoundingBox(img, objX, objY, objWidth, objHeight)
 		#fps, prevTime, img = cam.showFPS(fps, prevTime, img)
 		cv2.imshow("Camera Feed", img)
