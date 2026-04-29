@@ -7,12 +7,12 @@ import cv2
 from time import sleep
 import Robot_Move as move
 import Robot_Camera as cam
-from Robot_Camera import fps, prevTime, dispW, dispH
+from Robot_Camera import objExist, fps, prevTime, dispW, dispH
 
 speed = 0.5 #1 = full speed
 direction = "STOP"
 currentDirection = "STOP"
-mode = "STANDBY"
+mode = "WAIT"
 	
 def calcPanError(dispW, objWidth, objX):
 	dispCenterX = dispW/2
@@ -24,12 +24,14 @@ try:
 	robotCam = cam.initCam()
 	while True:
 		img = robotCam.capture_array()
-		if cv2.waitKey(1) == ord('s') and mode != "STANDBY":
-			print("Robot in Standby Mode")
-			mode = "STANDBY"
+		if cv2.waitKey(1) == ord('w') and mode != "WAIT":
+			print("Robot in Wait Mode")
+			mode = "WAIT"
 		if cv2.waitKey(1) == ord('m') and mode != "MOVE":
 			mode = "MOVE"
 			print("Robot in Move Mode")
+		if cv2.waitKey(1) == ord ('s'):
+			objExist = cam.getObjectOfInterest(robotCam)
 		if cv2.waitKey(1) == ord('q'): #if detect 'q' press
 			move.stopTurn() #make sure motor is off
 			break
