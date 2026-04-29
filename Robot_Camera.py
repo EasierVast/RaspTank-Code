@@ -107,7 +107,9 @@ def getOOI(img):
         contour = getContour(mask)
         #cv2.drawContours(img, [contour], 0, (0,255,0), 3)
         boxX, boxY, boxWidth, boxHeight = getBoundingBox(contour)
-    return boxX, boxY, boxWidth, boxHeight 
+        return boxX, boxY, boxWidth, boxHeight
+    else:
+        return 0, 0, 0, 0
 
 if __name__ == '__main__': #Test Code
     
