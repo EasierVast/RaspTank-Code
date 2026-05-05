@@ -9,7 +9,7 @@ import Robot_Move as move
 import Robot_Camera as cam
 from Robot_Camera import objExist, fps, prevTime, dispW, dispH
 
-speed = 0.5 #1 = full speed
+speed = 0.25 #1 = full speed
 direction = "STOP"
 currentDirection = "STOP"
 mode = "WAIT"
@@ -44,12 +44,12 @@ try:
 		if mode == "MOVE":
 			panError = calcPanError(dispW, objWidth, objX)
 			#print("panError = " + str(panError))
-			if panError > 100:
+			if panError > 30:
 				if currentDirection != "RIGHT":
 					print("RIGHT")
 					direction = "RIGHT"
 					currentDirection = "RIGHT"
-			elif panError < -100:
+			elif panError < -30:
 				if currentDirection != "LEFT":
 					print("LEFT")
 					direction = "LEFT"
