@@ -47,17 +47,17 @@ try:
 			#print("panError = " + str(panError))
 			if panError > panErrorRange:
 				if currentDirection != "RIGHT":
-					print("RIGHT")
+					#print("RIGHT")
 					direction = "RIGHT"
 					currentDirection = "RIGHT"
 			elif panError < -panErrorRange:
 				if currentDirection != "LEFT":
-					print("LEFT")
+					#print("LEFT")
 					direction = "LEFT"
 					currentDirection = "LEFT"
 			else:
 				if currentDirection != "STOP":
-					print("STOP")
+					#print("STOP")
 					direction = "STOP"
 					currentDirection = "STOP"
 			move.robotMove(direction, speed)
