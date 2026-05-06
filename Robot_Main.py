@@ -13,6 +13,7 @@ speed = 0.25 #1 = full speed
 direction = "STOP"
 currentDirection = "STOP"
 mode = "WAIT"
+panErrorRange = 30
 	
 def calcPanError(dispW, objWidth, objX):
 	dispCenterX = dispW/2
@@ -44,12 +45,12 @@ try:
 		if mode == "MOVE":
 			panError = calcPanError(dispW, objWidth, objX)
 			#print("panError = " + str(panError))
-			if panError > 30:
+			if panError > panErrorRange:
 				if currentDirection != "RIGHT":
 					print("RIGHT")
 					direction = "RIGHT"
 					currentDirection = "RIGHT"
-			elif panError < -30:
+			elif panError < -panErrorRange:
 				if currentDirection != "LEFT":
 					print("LEFT")
 					direction = "LEFT"
