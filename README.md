@@ -17,13 +17,20 @@ For this project, the hardware that was used was the Adeept RaspTank Metal V1; a
 - Build the robot and install the Raspberry Pi OS as instructed in the tutorial included with the robot; this project does not use any other dependencies other than the ones that have been installed during the tutorials.
 - Clone this repository to your Raspberry Pi.
 
-## Running the Program
-- Within the repository, execute and run the script 'Robot_Main.py'.
-- Position/Hold the object of interest in front of the robot's camera, so that the object is in the centre of the camera feed.
+## Running the Object Follow Program
+- Within the repository, execute and run the script 'Robot_ObjFollow.py'.
+- Position/Hold the object of interest in front of the robot's camera, so that the object is in the centre of the camera feed.  
+  This only needs to be done once unless you wish to change the obeject of interest
 - Press the 's' key on your keyboard to have the robot take a screenshot; the command line will confirm if a screenshot is taken.
 - Once a screenshot has been taken, press the 'm' key on your keyboard to set the robot in motion; the robot should now follow your object of interest as you move it around.
 - To return the robot to its wait state, press the 'w' key on your keyboard.
 - To stop the program press the 'q' key on your keyboard.
+  
+### Video Demonstration
+
+https://github.com/user-attachments/assets/a0b07152-d0b0-45ca-b2ff-ed810314ad0a
+
+https://github.com/user-attachments/assets/bff5b624-7903-45e3-8315-2fefc12661ea
 
 Thank you Adeept for your robotic hardware and your tutorials, which have aided in my journey on implementing Raspberry Pi into my projects.
 https://www.adeept.com/
