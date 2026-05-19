@@ -17,5 +17,5 @@ pca = PCA9685(i2c, address=0x5f) #default 0x40 but HAT uses 0x5f
 pca.frequency = PWM
 
 #Intialize servo & set angle
-servoShoulder = servo.Servo(pca.channels[shoulderPin], min_pulse=500, max_pulse=2500, actuation_range=180)
+servoShoulder = servo.Servo(pca.channels[shoulderPin], min_pulse=200, max_pulse=2400, actuation_range=180)
 servoShoulder.angle = 90
