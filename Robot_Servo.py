@@ -6,6 +6,10 @@ from adafruit_motor import servo
 from time import sleep
 
 shoulderPin = 0
+elbowPin = 1
+wristPin = 2
+clawPin = 3 #closed claw at 0
+camPin = 4 #movement range 50 - 100
 
 PWM = 50 #PWM frequency to 50hz (standard value for servo)
 
