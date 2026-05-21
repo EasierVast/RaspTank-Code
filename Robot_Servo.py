@@ -20,6 +20,11 @@ i2c = busio.I2C(SCL, SDA)
 pca = PCA9685(i2c, address=0x5f) #default 0x40 but HAT uses 0x5f
 pca.frequency = PWM
 
-#Intialize servo & set angle
-servoShoulder = servo.Servo(pca.channels[shoulderPin], min_pulse=200, max_pulse=2400, actuation_range=180)
-servoShoulder.angle = 90
+def setServoAngle(ID, angle):
+	#Intialize servo & set angle
+	servoAngle = servo.Servo(pca.channels[ID], min_pulse=200, max_pulse=2400, actuation_range=180)
+	servoAngle.angle = angle
+
+if __name__ == '__main__': #Test Code
+	
+	setServoAngle(shoulderPin, 90)
