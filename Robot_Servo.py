@@ -27,4 +27,10 @@ def setServoAngle(ID, angle):
 
 if __name__ == '__main__': #Test Code
 	
-	setServoAngle(shoulderPin, 90)
+	setServoAngle(shoulderPin, 20)
+	setServoAngle(elbowPin, 40)
+	setServoAngle(wristPin, 90)
+	setServoAngle(clawPin, 0)
+	setServoAngle(camPin, 90)
+	
+	
