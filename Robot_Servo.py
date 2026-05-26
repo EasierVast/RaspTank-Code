@@ -24,13 +24,15 @@ def setServoAngle(ID, angle):
 	#Intialize servo & set angle
 	servoAngle = servo.Servo(pca.channels[ID], min_pulse=200, max_pulse=2400, actuation_range=180)
 	servoAngle.angle = angle
-
-if __name__ == '__main__': #Test Code
 	
+def initPosition():
 	setServoAngle(shoulderPin, 20)
 	setServoAngle(elbowPin, 40)
 	setServoAngle(wristPin, 90)
 	setServoAngle(clawPin, 103)
 	setServoAngle(camPin, 90)
+
+if __name__ == '__main__': #Test Code
 	
+	initPosition()
 	
