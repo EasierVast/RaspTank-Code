@@ -30,7 +30,7 @@ i2c = busio.I2C(SCL, SDA)
 pca = PCA9685(i2c, address=0x5f) #default 0x40 but HAT uses 0x5f
 pca.frequency = PWM
 
-class Servo:
+class robotServo:
 	def __init__(self, pin, angle):
 		self.pin = pin
 		self.angle = angle
@@ -41,11 +41,11 @@ class Servo:
 		servoAngle.angle = self.angle
 
 #Servo Objects		
-shoulder = Servo(pin = 0, angle = 20)
-elbow = Servo(pin = 1, angle = 40)
-wrist = Servo(pin = 2, angle = 90)
-claw = Servo(pin = 3, angle = 103)
-cam = Servo(pin = 4, angle = 90)
+shoulder = robotServo(pin = 0, angle = 20)
+elbow = robotServo(pin = 1, angle = 40)
+wrist = robotServo(pin = 2, angle = 90)
+claw = robotServo(pin = 3, angle = 103)
+cam = robotServo(pin = 4, angle = 90)
 	
 def initPosition():
 	shoulder.setServoAngle()
