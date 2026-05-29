@@ -11,7 +11,7 @@ shoulderPin = 0
 elbowPin = 1
 wristPin = 2
 clawPin = 3 #closed claw at 100 (103 for safety)
-camPin = 4 #movement range 50 - 100
+camPin = 4 #movement range 50 - 100 (55 - 95 for safety)
 
 #Servo Default Positions
 shoulderAngle = 20
@@ -40,14 +40,19 @@ class robotServo:
 	def setServoAngle(self):
 		#Intialize servo & set angle
 		servoAngle = servo.Servo(pca.channels[self.pin], min_pulse=200, max_pulse=2400, actuation_range=180)
+		if self.angle < self.minAngle:
+			self.angle = self.minAngle
+		if self.angle > self.maxAngle:
+			self.angle = self.maxAngle
 		servoAngle.angle = self.angle
+		
 
 #Servo Objects		
 shoulder = robotServo(pin = 0, angle = 20)
 elbow = robotServo(pin = 1, angle = 40)
 wrist = robotServo(pin = 2, angle = 90)
 claw = robotServo(pin = 3, angle = 103, minAngle = 103)
-cam = robotServo(pin = 4, angle = 90, minAngle = 10, maxAngle = 100)
+cam = robotServo(pin = 4, angle = 90, minAngle = 55, maxAngle = 95)
 	
 def initPosition():
 	shoulder.setServoAngle()
@@ -59,4 +64,10 @@ def initPosition():
 if __name__ == '__main__': #Test Code
 	
 	initPosition()
+
+	for i in range(180): #The cam servo trys to turn from 0 to 180 degrees (should only move from 55 to 95).
+		cam.angle = i
+		cam.setServoAngle()
+		print (cam.angle) #Check angle value
+		sleep(0.01)
 	
