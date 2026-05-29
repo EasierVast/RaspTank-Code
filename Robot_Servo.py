@@ -31,9 +31,11 @@ pca = PCA9685(i2c, address=0x5f) #default 0x40 but HAT uses 0x5f
 pca.frequency = PWM
 
 class robotServo:
-	def __init__(self, pin, angle):
+	def __init__(self, pin, angle, minAngle = 10, maxAngle = 180):
 		self.pin = pin
 		self.angle = angle
+		self.minAngle = minAngle
+		self.maxAngle = maxAngle
 		
 	def setServoAngle(self):
 		#Intialize servo & set angle
@@ -44,8 +46,8 @@ class robotServo:
 shoulder = robotServo(pin = 0, angle = 20)
 elbow = robotServo(pin = 1, angle = 40)
 wrist = robotServo(pin = 2, angle = 90)
-claw = robotServo(pin = 3, angle = 103)
-cam = robotServo(pin = 4, angle = 90)
+claw = robotServo(pin = 3, angle = 103, minAngle = 103)
+cam = robotServo(pin = 4, angle = 90, minAngle = 10, maxAngle = 100)
 	
 def initPosition():
 	shoulder.setServoAngle()
