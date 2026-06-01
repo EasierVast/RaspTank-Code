@@ -48,26 +48,26 @@ class robotServo:
 		
 
 #Servo Objects		
-shoulder = robotServo(pin = 0, angle = 20)
-elbow = robotServo(pin = 1, angle = 40)
-wrist = robotServo(pin = 2, angle = 90)
-claw = robotServo(pin = 3, angle = 103, minAngle = 103)
-cam = robotServo(pin = 4, angle = 90, minAngle = 55, maxAngle = 95)
+shoulderServo = robotServo(pin = 0, angle = 20)
+elbowServo = robotServo(pin = 1, angle = 40)
+wristServo = robotServo(pin = 2, angle = 90)
+clawServo = robotServo(pin = 3, angle = 103, minAngle = 103)
+camServo = robotServo(pin = 4, angle = 90, minAngle = 55, maxAngle = 95)
 	
 def initPosition():
-	shoulder.setServoAngle()
-	elbow.setServoAngle()
-	wrist.setServoAngle()
-	claw.setServoAngle()
-	cam.setServoAngle()
+	shoulderServo.setServoAngle()
+	elbowServo.setServoAngle()
+	wristServo.setServoAngle()
+	clawServo.setServoAngle()
+	camServo.setServoAngle()
 
 if __name__ == '__main__': #Test Code
 	
 	initPosition()
 
 	for i in range(180): #The cam servo trys to turn from 0 to 180 degrees (should only move from 55 to 95).
-		cam.angle = i
-		cam.setServoAngle()
-		print (cam.angle) #Check angle value
+		camServo.angle = i
+		camServo.setServoAngle()
+		print (camServo.angle) #Check angle value
 		sleep(0.01)
 	

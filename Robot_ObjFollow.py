@@ -9,6 +9,7 @@ import Robot_Move as move
 import Robot_Camera as cam
 from Robot_Camera import objExist, fps, prevTime, dispW, dispH
 import Robot_Servo as servo
+from Robot_Servo import camServo
 
 speed = 0.25 #1 = full speed
 direction = "STOP"
