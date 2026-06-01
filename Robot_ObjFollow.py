@@ -8,6 +8,7 @@ from time import sleep
 import Robot_Move as move
 import Robot_Camera as cam
 from Robot_Camera import objExist, fps, prevTime, dispW, dispH
+import Robot_Servo as servo
 
 speed = 0.25 #1 = full speed
 direction = "STOP"
@@ -23,6 +24,8 @@ def calcPanError(dispW, objWidth, objX):
 
 try:
 	robotCam = cam.initCam()
+	servo.initPosition()
+	
 	while True:
 		img = robotCam.capture_array()
 		if cv2.waitKey(1) == ord('w') and mode != "WAIT":
