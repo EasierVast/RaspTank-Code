@@ -22,6 +22,12 @@ def calcPanError(dispW, objWidth, objX):
 	objCenterX = objWidth/2
 	panError = (objX + objCenterX) - dispCenterX
 	return panError
+	
+def calcTiltError(dispH, objHeight, objY):
+	dispCenterY = dispH/2
+	objCenterY = objHeight/2
+	tiltError = (objY + objCenterY) - dispCenterY
+	return tiltError
 
 try:
 	robotCam = cam.initCam()
@@ -49,6 +55,8 @@ try:
 		if mode == "MOVE":
 			panError = calcPanError(dispW, objWidth, objX)
 			#print("panError = " + str(panError))
+			tiltError = calcTiltError(dispH, objHeight, objY)
+			print("tiltError = " + str(tiltError))
 			if panError > panErrorRange:
 				if currentDirection != "RIGHT":
 					#print("RIGHT")
@@ -64,7 +72,7 @@ try:
 					#print("STOP")
 					direction = "STOP"
 					currentDirection = "STOP"
-			move.robotMove(direction, speed)
+			#move.robotMove(direction, speed)
 		 
 except KeyboardInterrupt: #ctrl+C to stop code
     print("EXIT LOOP")
