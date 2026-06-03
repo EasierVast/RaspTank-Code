@@ -76,13 +76,15 @@ try:
 					print("STOP PAN")
 					panDirection = "STOP"
 					currentPanDirection = "STOP"
-			#move.robotMove(panDirection, speed)
+			move.robotMove(panDirection, speed)
 			
 			if tiltError > tiltErrorRange:
+				camServo.angle = camServo.angle + 1
 				if currentTiltDirection != "DOWN":
 					print("DOWN")
 					currentTiltDirection = "DOWN"
 			elif tiltError < -tiltErrorRange:
+				camServo.angle = camServo.angle - 1
 				if currentTiltDirection != "UP":
 					print("UP")
 					currentTiltDirection = "UP"
@@ -90,6 +92,7 @@ try:
 				if currentTiltDirection != "STOP":
 					print("STOP TILT")
 					currentTiltDirection = "STOP"
+			camServo.setServoAngle()
 	
 		 
 except KeyboardInterrupt: #ctrl+C to stop code
