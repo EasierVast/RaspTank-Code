@@ -48,12 +48,18 @@ try:
 			objExist = cam.getObjectOfInterest(robotCam)
 		if cv2.waitKey(1) == ord('q'): #if detect 'q' press
 			move.stopTurn() #make sure motor is off
+			servo.initPosition()
+			
 			break
 			
 		objX, objY, objWidth, objHeight = cam.getOOI(img, objExist)
 		img = cam.drawBoundingBox(img, objX, objY, objWidth, objHeight)
 		#fps, prevTime, img = cam.showFPS(fps, prevTime, img)
 		cv2.imshow("Camera Feed", img)
+		
+		if mode == "WAIT":
+			move.stopTurn() #make sure motor is off
+			servo.initPosition()
 		
 		if mode == "MOVE":
 			panError = calcPanError(dispW, objWidth, objX)
@@ -98,4 +104,5 @@ try:
 except KeyboardInterrupt: #ctrl+C to stop code
     print("EXIT LOOP")
     move.stopTurn() #make sure motor is off
+    servo.initPosition()
 
