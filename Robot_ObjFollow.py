@@ -8,21 +8,34 @@ from time import sleep
 import Robot_Move as move
 import Robot_Camera as cam
 from Robot_Camera import objExist, fps, prevTime, dispW, dispH
+import Robot_Servo as servo
+from Robot_Servo import camServo
 
 speed = 0.25 #1 = full speed
-direction = "STOP"
-currentDirection = "STOP"
+panDirection = "STOP"
+currentPanDirection = "STOP"
+tiltDirection = "STOP"
+currentTiltDirection = "STOP"
 mode = "WAIT"
 panErrorRange = 30
+tiltErrorRange = 30
 	
 def calcPanError(dispW, objWidth, objX):
 	dispCenterX = dispW/2
 	objCenterX = objWidth/2
 	panError = (objX + objCenterX) - dispCenterX
 	return panError
+	
+def calcTiltError(dispH, objHeight, objY):
+	dispCenterY = dispH/2
+	objCenterY = objHeight/2
+	tiltError = (objY + objCenterY) - dispCenterY
+	return tiltError
 
 try:
 	robotCam = cam.initCam()
+	servo.initPosition()
+	
 	while True:
 		img = robotCam.capture_array()
 		if cv2.waitKey(1) == ord('w') and mode != "WAIT":
@@ -45,22 +58,42 @@ try:
 		if mode == "MOVE":
 			panError = calcPanError(dispW, objWidth, objX)
 			#print("panError = " + str(panError))
+			tiltError = calcTiltError(dispH, objHeight, objY)
+			#print("tiltError = " + str(tiltError))
+			
 			if panError > panErrorRange:
-				if currentDirection != "RIGHT":
+				if currentPanDirection != "RIGHT":
 					#print("RIGHT")
-					direction = "RIGHT"
-					currentDirection = "RIGHT"
+					panDirection = "RIGHT"
+					currentPanDirection = "RIGHT"
 			elif panError < -panErrorRange:
-				if currentDirection != "LEFT":
+				if currentPanDirection != "LEFT":
 					#print("LEFT")
-					direction = "LEFT"
-					currentDirection = "LEFT"
+					panDirection = "LEFT"
+					currentPanDirection = "LEFT"
 			else:
-				if currentDirection != "STOP":
-					#print("STOP")
-					direction = "STOP"
-					currentDirection = "STOP"
-			move.robotMove(direction, speed)
+				if currentPanDirection != "STOP":
+					#print("STOP PAN")
+					panDirection = "STOP"
+					currentPanDirection = "STOP"
+			move.robotMove(panDirection, speed)
+			
+			if tiltError > tiltErrorRange:
+				camServo.angle = camServo.angle + 1
+				if currentTiltDirection != "DOWN":
+					#print("DOWN")
+					currentTiltDirection = "DOWN"
+			elif tiltError < -tiltErrorRange:
+				camServo.angle = camServo.angle - 1
+				if currentTiltDirection != "UP":
+					#print("UP")
+					currentTiltDirection = "UP"
+			else:
+				if currentTiltDirection != "STOP":
+					#print("STOP TILT")
+					currentTiltDirection = "STOP"
+			camServo.setServoAngle()
+	
 		 
 except KeyboardInterrupt: #ctrl+C to stop code
     print("EXIT LOOP")
