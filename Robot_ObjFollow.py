@@ -63,17 +63,17 @@ try:
 			
 			if panError > panErrorRange:
 				if currentPanDirection != "RIGHT":
-					print("RIGHT")
+					#print("RIGHT")
 					panDirection = "RIGHT"
 					currentPanDirection = "RIGHT"
 			elif panError < -panErrorRange:
 				if currentPanDirection != "LEFT":
-					print("LEFT")
+					#print("LEFT")
 					panDirection = "LEFT"
 					currentPanDirection = "LEFT"
 			else:
 				if currentPanDirection != "STOP":
-					print("STOP PAN")
+					#print("STOP PAN")
 					panDirection = "STOP"
 					currentPanDirection = "STOP"
 			move.robotMove(panDirection, speed)
@@ -81,16 +81,16 @@ try:
 			if tiltError > tiltErrorRange:
 				camServo.angle = camServo.angle + 1
 				if currentTiltDirection != "DOWN":
-					print("DOWN")
+					#print("DOWN")
 					currentTiltDirection = "DOWN"
 			elif tiltError < -tiltErrorRange:
 				camServo.angle = camServo.angle - 1
 				if currentTiltDirection != "UP":
-					print("UP")
+					#print("UP")
 					currentTiltDirection = "UP"
 			else:
 				if currentTiltDirection != "STOP":
-					print("STOP TILT")
+					#print("STOP TILT")
 					currentTiltDirection = "STOP"
 			camServo.setServoAngle()
 	
