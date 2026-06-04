@@ -5,13 +5,6 @@ from adafruit_pca9685 import PCA9685
 from adafruit_motor import servo
 from time import sleep
 
-"""
-#Servo Pins
-shoulderPin = 0
-elbowPin = 1
-wristPin = 2
-clawPin = 3 #closed claw at 100 (103 for safety)
-camPin = 4 #movement range 50 - 100 (55 - 95 for safety)
 
 #Servo Default Positions
 shoulderAngle = 20
@@ -19,7 +12,6 @@ elbowAngle = 40
 wristAngle = 90
 clawAngle = 103
 camAngle = 90
-"""
 
 PWM = 50 #PWM frequency to 50hz (standard value for servo)
 
@@ -55,10 +47,15 @@ clawServo = robotServo(pin = 3, angle = 103, minAngle = 103)
 camServo = robotServo(pin = 4, angle = 90, minAngle = 55, maxAngle = 95)
 	
 def initPosition():
+	shoulderServo.angle = shoulderAngle
 	shoulderServo.setServoAngle()
+	elbowServo.angle = elbowAngle
 	elbowServo.setServoAngle()
+	wristServo.angle = wristAngle
 	wristServo.setServoAngle()
+	clawServo.angle = clawAngle
 	clawServo.setServoAngle()
+	camServo.angle = camAngle
 	camServo.setServoAngle()
 
 if __name__ == '__main__': #Test Code
