@@ -20,17 +20,11 @@ mode = "WAIT"
 panErrorRange = 30
 tiltErrorRange = 30
 	
-def calcPanError(dispW, objWidth, objX):
-	dispCenterX = dispW/2
-	objCenterX = objWidth/2
-	panError = (objX + objCenterX) - dispCenterX
-	return panError
-	
-def calcTiltError(dispH, objHeight, objY):
-	dispCenterY = dispH/2
-	objCenterY = objHeight/2
-	tiltError = (objY + objCenterY) - dispCenterY
-	return tiltError
+def calcError(disp, objMeasure, objAxis):
+	dispCenter = disp/2
+	objCenter = objMeasure/2
+	error = (objAxis + objCenter) - dispCenter
+	return error
 
 try:
 	robotCam = cam.initCam()
@@ -49,7 +43,6 @@ try:
 		if cv2.waitKey(1) == ord('q'): #if detect 'q' press
 			move.stopTurn() #make sure motor is off
 			servo.initPosition()
-			
 			break
 			
 		objX, objY, objWidth, objHeight = cam.getOOI(img, objExist)
@@ -62,9 +55,9 @@ try:
 			servo.initPosition()
 		
 		if mode == "MOVE":
-			panError = calcPanError(dispW, objWidth, objX)
+			panError = calcError(dispW, objWidth, objX)
 			#print("panError = " + str(panError))
-			tiltError = calcTiltError(dispH, objHeight, objY)
+			tiltError = calcError(dispH, objHeight, objY)
 			#print("tiltError = " + str(tiltError))
 			
 			if panError > panErrorRange:
