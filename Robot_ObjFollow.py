@@ -25,10 +25,14 @@ def calcError(disp, objMeasure, objAxis):
 	objCenter = objMeasure/2
 	error = (objAxis + objCenter) - dispCenter
 	return error
+	
+def initDefaultState():
+	move.stopTurn() #make sure motor is off
+	servo.initPosition() #move servos to initial positions
 
 try:
 	robotCam = cam.initCam()
-	servo.initPosition()
+	initDefaultState()
 	
 	while True:
 		img = robotCam.capture_array()
@@ -41,8 +45,7 @@ try:
 		if cv2.waitKey(1) == ord ('s'):
 			objExist = cam.getObjectOfInterest(robotCam)
 		if cv2.waitKey(1) == ord('q'): #if detect 'q' press
-			move.stopTurn() #make sure motor is off
-			servo.initPosition()
+			initDefaultState()
 			break
 			
 		objX, objY, objWidth, objHeight = cam.getOOI(img, objExist)
@@ -51,8 +54,7 @@ try:
 		cv2.imshow("Camera Feed", img)
 		
 		if mode == "WAIT":
-			move.stopTurn() #make sure motor is off
-			servo.initPosition()
+			initDefaultState()
 		
 		if mode == "MOVE":
 			panError = calcError(dispW, objWidth, objX)
@@ -96,6 +98,5 @@ try:
 		 
 except KeyboardInterrupt: #ctrl+C to stop code
     print("EXIT LOOP")
-    move.stopTurn() #make sure motor is off
-    servo.initPosition()
+    initDefaultState()
 
