@@ -28,9 +28,9 @@ For this project, the hardware that was used was the Adeept RaspTank Metal V1; a
   
 ### Video Demonstration
 
-https://github.com/user-attachments/assets/a0b07152-d0b0-45ca-b2ff-ed810314ad0a
+https://github.com/user-attachments/assets/ede39aba-feab-4a02-9fab-08957aded318
 
-https://github.com/user-attachments/assets/bff5b624-7903-45e3-8315-2fefc12661ea
+https://github.com/user-attachments/assets/b069f2fc-189b-4038-8cd3-eb7370d0717f
 
 Thank you Adeept for your robotic hardware and your tutorials, which have aided in my journey on implementing Raspberry Pi into my projects.
 https://www.adeept.com/
