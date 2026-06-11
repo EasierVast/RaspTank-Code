@@ -27,6 +27,8 @@ In this project, I am hoping to further my understanding of how to utilise a Ras
    Follow the tutorials included with your Adeept RaspTank Metal to:
    - Assemble the RaspTank hardware  
    - Install Raspberry Pi OS
+     
+Tutorials can be found at: https://www.adeept.com/learn/detail-85.html.
 
 2. **Dependencies**:  
    No additional dependencies required beyond those installed during the tutorial process.
