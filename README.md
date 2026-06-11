@@ -1,12 +1,18 @@
 In this project, I am hoping to further my understanding of how to utilise a Raspberry Pi within a robot. For this project, I wanted to have my robot track and follow an object as it moves within the view of the robot's camera. Initially I did not know how I was going to define the object of interest, as I wanted to give later users the ability to set their own object of interest. I decided to implement a system where the robot has a standby mode and a move mode, where during the standby mode the user can have the robot take a picture of what it sees, then get a definition of the object of interest from the image.
 
-## Technologies
+## Technologies Used
+### Hardware
+- Raspberry Pi 5
+### Python Libraries
 - OpenCV
-- Numpy
-- Board
-- Busio
-- Adafruit PCA9685
-- Adafruit Motor
+- NumPy
+- CircuitPython Libraries:
+  - board
+  - busio
+- Adafruit Python Libraries:
+  - adafruit_pca9685
+  - adafruit_motor
+
 
 ## Features
 - Defines its own object of interest by taking a screenshot and extracting an effective colour range from the screenshot.
@@ -20,7 +26,7 @@ In this project, I am hoping to further my understanding of how to utilise a Ras
 1. **Robot Assembly**:  
    Follow the tutorials included with your Adeept RaspTank Metal to:
    - Assemble the RaspTank hardware  
-   - Install Raspberry Pi OS  
+   - Install Raspberry Pi OS
 
 2. **Dependencies**:  
    No additional dependencies required beyond those installed during the tutorial process.
