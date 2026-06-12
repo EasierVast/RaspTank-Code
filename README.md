@@ -15,8 +15,14 @@ In this project, I am hoping to further my understanding of how to utilise a Ras
 
 
 ## Features
-- Defines its own object of interest by taking a screenshot and extracting an effective colour range from the screenshot.
-- Can track/follow the object of interest along both the x-axis (by moving the entire robot) and y-axis (via a servo in the camera).
+- **Operation Modes**: 
+  - **WAIT**: Puts the robot in standby. (system remains active but motion is paused).
+  - **MOVE**: Engages autonomous tracking and movement.
+- **Keyboard-Triggered Screenshots**: Capture the camera view instantly with a simple keyboard command.
+- **Dynamic Object Detection**: Define object of interest by extracting colour range from screenshot.
+- **Dual-Axis Tracking**:
+  - **X-Axis**: Full robot movement for horizontal tracking.
+  - **Y-Axis**: Servo-controlled camera tilt for vertical tracking.
 
 ## Installation
 ### Hardware Requirements:
