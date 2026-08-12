@@ -49,8 +49,8 @@ Tutorials can be found at: https://www.adeept.com/learn/detail-85.html.
    python Robot_ObjFollow.py
    ```
 
-2. Initialize target object:
-   - Position object in center of camera view
+2. Initialise target object:
+   - Position object in centre of camera view
    - Press `s` to capture reference screenshot
      
    **Note:** Only required once unless changing the object of interest.
@@ -61,7 +61,7 @@ Tutorials can be found at: https://www.adeept.com/learn/detail-85.html.
 | WAIT | Robot stationary, camera at default angle |
 | MOVE | Robot actively follows target object |
 
-**Note:** When starting the program the robot will be in WAIT mode.*
+**Note:** When starting the program the robot will be in WAIT mode.
 
 ## Key Commands
 | Key | Action |
